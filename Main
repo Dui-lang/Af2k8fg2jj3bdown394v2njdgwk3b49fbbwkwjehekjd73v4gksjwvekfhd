@@ -1,1 +1,207 @@
+local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local SafeModeBtn = Instance.new("TextButton")
+local InfRangeBtn = Instance.new("TextButton")
+local UICorner = Instance.new("UICorner")
+local UIListLayout = Instance.new("UIListLayout")
 
+ScreenGui.Name = "MiniPanelNexxuzz"
+ScreenGui.Parent = game:GetService("CoreGui")
+ScreenGui.ResetOnSpawn = false
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+MainFrame.Position = UDim2.new(0.05, 0, 0.4, 0)
+MainFrame.Size = UDim2.new(0, 120, 0, 90)
+MainFrame.Active = true
+MainFrame.Draggable = true
+
+UICorner.CornerRadius = UDim.new(0, 8)
+UICorner.Parent = MainFrame
+
+UIListLayout.Parent = MainFrame
+UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+UIListLayout.Padding = UDim.new(0, 10)
+
+local function StyleButton(btn, text)
+    btn.Size = UDim2.new(0, 100, 0, 30)
+    btn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    btn.Text = text
+    btn.TextColor3 = Color3.new(1, 1, 1)
+    btn.Font = Enum.Font.SourceSansBold
+    btn.TextSize = 14
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 6)
+    corner.Parent = btn
+end
+
+StyleButton(SafeModeBtn, "Safe Mode: OFF")
+SafeModeBtn.Parent = MainFrame
+
+StyleButton(InfRangeBtn, "Inf Range: OFF")
+InfRangeBtn.Parent = MainFrame
+
+local safeModeActive = false
+SafeModeBtn.MouseButton1Click:Connect(function()
+    safeModeActive = not safeModeActive
+    local char = game.Players.LocalPlayer.Character
+    local hrp = char and char:FindFirstChild("HumanoidRootPart")
+    
+    if safeModeActive then
+        SafeModeBtn.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+        SafeModeBtn.Text = "Safe Mode: ON"
+        if hrp then
+            local flag = Instance.new("BoolValue")
+            flag.Name = "UpLoop"
+            flag.Parent = hrp
+            task.spawn(function()
+                while flag.Parent and safeModeActive do
+                    local pos = hrp.Position
+                    hrp.CFrame = CFrame.new(pos.X, pos.Y + 273861, pos.Z)
+                    task.wait(0.05)
+                end
+            end)
+        end
+    else
+        SafeModeBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+        SafeModeBtn.Text = "Safe Mode: OFF"
+        if hrp and hrp:FindFirstChild("UpLoop") then
+            hrp.UpLoop:Destroy()
+        end
+    end
+end)
+
+local infRangeActive = false
+local infRangeConn = nil
+
+InfRangeBtn.MouseButton1Click:Connect(function()
+    infRangeActive = not infRangeActive
+    
+    if infRangeActive then
+        InfRangeBtn.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+        InfRangeBtn.Text = "Inf Range: ON"
+        infRangeConn = game:GetService("RunService").Heartbeat:Connect(function()
+            pcall(function()
+                local char = game.Players.LocalPlayer.Character
+                local hrp = char and char:FindFirstChild("HumanoidRootPart")
+                if hrp then
+                    hrp.CFrame = CFrame.new(hrp.Position.X, 30000000000000000000
+300000000000000
+, hrp.Position.Z)
+                end
+            end)
+        end)
+    else
+        InfRangeBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+        InfRangeBtn.Text = "Inf Range: OFF"
+        if infRangeConn then
+            infRangeConn:Disconnect()
+            infRangeConn = nil
+        end
+    end
+end)local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local SafeModeBtn = Instance.new("TextButton")
+local InfRangeBtn = Instance.new("TextButton")
+local UICorner = Instance.new("UICorner")
+local UIListLayout = Instance.new("UIListLayout")
+
+ScreenGui.Name = "MiniPanelNexxuzz"
+ScreenGui.Parent = game:GetService("CoreGui")
+ScreenGui.ResetOnSpawn = false
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+MainFrame.Position = UDim2.new(0.05, 0, 0.4, 0)
+MainFrame.Size = UDim2.new(0, 120, 0, 90)
+MainFrame.Active = true
+MainFrame.Draggable = true
+
+UICorner.CornerRadius = UDim.new(0, 8)
+UICorner.Parent = MainFrame
+
+UIListLayout.Parent = MainFrame
+UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+UIListLayout.Padding = UDim.new(0, 10)
+
+local function StyleButton(btn, text)
+    btn.Size = UDim2.new(0, 100, 0, 30)
+    btn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    btn.Text = text
+    btn.TextColor3 = Color3.new(1, 1, 1)
+    btn.Font = Enum.Font.SourceSansBold
+    btn.TextSize = 14
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 6)
+    corner.Parent = btn
+end
+
+StyleButton(SafeModeBtn, "Safe Mode: OFF")
+SafeModeBtn.Parent = MainFrame
+
+StyleButton(InfRangeBtn, "Inf Range: OFF")
+InfRangeBtn.Parent = MainFrame
+
+local safeModeActive = false
+SafeModeBtn.MouseButton1Click:Connect(function()
+    safeModeActive = not safeModeActive
+    local char = game.Players.LocalPlayer.Character
+    local hrp = char and char:FindFirstChild("HumanoidRootPart")
+    
+    if safeModeActive then
+        SafeModeBtn.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+        SafeModeBtn.Text = "Safe Mode: ON"
+        if hrp then
+            local flag = Instance.new("BoolValue")
+            flag.Name = "UpLoop"
+            flag.Parent = hrp
+            task.spawn(function()
+                while flag.Parent and safeModeActive do
+                    local pos = hrp.Position
+                    hrp.CFrame = CFrame.new(pos.X, pos.Y + 273861, pos.Z)
+                    task.wait(0.05)
+                end
+            end)
+        end
+    else
+        SafeModeBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+        SafeModeBtn.Text = "Safe Mode: OFF"
+        if hrp and hrp:FindFirstChild("UpLoop") then
+            hrp.UpLoop:Destroy()
+        end
+    end
+end)
+
+local infRangeActive = false
+local infRangeConn = nil
+
+InfRangeBtn.MouseButton1Click:Connect(function()
+    infRangeActive = not infRangeActive
+    
+    if infRangeActive then
+        InfRangeBtn.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+        InfRangeBtn.Text = "Inf Range: ON"
+        infRangeConn = game:GetService("RunService").Heartbeat:Connect(function()
+            pcall(function()
+                local char = game.Players.LocalPlayer.Character
+                local hrp = char and char:FindFirstChild("HumanoidRootPart")
+                if hrp then
+                    hrp.CFrame = CFrame.new(hrp.Position.X, 30000000000000000000
+300000000000000
+, hrp.Position.Z)
+                end
+            end)
+        end)
+    else
+        InfRangeBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+        InfRangeBtn.Text = "Inf Range: OFF"
+        if infRangeConn then
+            infRangeConn:Disconnect()
+            infRangeConn = nil
+        end
+    end
+end)
